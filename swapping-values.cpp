@@ -1,6 +1,12 @@
 #include <iostream>
 using namespace std;
 
+void ClearScreen()
+{
+	int n;
+	for (n = 0; n < 10; n++)                                                                                                                                                    printf( "\n\n\n\n\n\n\n\n\n\n" );                                                                                                                  
+}
+
 int main() 
 {
 	//Swapping values of two variable with a third var
@@ -14,7 +20,7 @@ int main()
 	b = temp;
 
 	cout << "a = " << a << ", b= " << b << endl;
-	
+	ClearScreen();
 	//Swapping values of two variable without a third var
 	int x = 10;
 	int y = 20;
@@ -27,4 +33,5 @@ int main()
 
 	cout << "x = " << x << ", y = " << y << endl;
 }
+
 
