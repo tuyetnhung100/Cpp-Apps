@@ -127,7 +127,7 @@ void DogTypes::writeBreeds() {
     outFile.open("breeds.txt");
     for(i = 0; i < countAndIndex; ++i) {
         outFile << breeds[i].name << "," << breeds[i].description << "," << breeds[i].classification 
-        << "," << breeds[i].avgWeight << "," << breeds[i].avgHeight << "," << breeds[i].origin << endl;
+        << "," << fixed << setprecision(2) << breeds[i].avgWeight << "," << breeds[i].avgHeight << "," << breeds[i].origin << endl;
     }
     outFile.close();
 }
