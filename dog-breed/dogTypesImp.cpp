@@ -1,4 +1,4 @@
-#include <iostream>
+//#include <iostream>
 #include "dogsHeader.hpp"
 
 // const int STR_SIZE = 100;
@@ -121,4 +121,14 @@ void DogTypes::listBreeds() {
     }
 }
 
+void DogTypes::writeBreeds() {
+    ofstream outFile;
+    int i;
+    outFile.open("breeds.txt");
+    for(i = 0; i < countAndIndex; ++i) {
+        outFile << breeds[i].name << "," << breeds[i].description << "," << breeds[i].classification 
+        << "," << breeds[i].avgWeight << "," << breeds[i].avgHeight << "," << breeds[i].origin << endl;
+    }
+    outFile.close();
+}
 

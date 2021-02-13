@@ -39,10 +39,12 @@ int main() {
         } while(choice != 'Q');
         if(choice == 'Q') {
             cout << "Terminating Program." << endl;
+            dogDatabase.writeBreeds();
         } 
     }
     else {
         cout << "Terminating program." << endl;
+        dogDatabase.writeBreeds();
     }
     return 0;
 }

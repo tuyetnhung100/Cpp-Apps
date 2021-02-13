@@ -27,7 +27,7 @@ class DogTypes {
 public:
     DogTypes();
     int loadBreeds();
-    //void writeBreeds();
+    void writeBreeds();
     bool searchBreeds();
     void addABreed();
     void listBreeds();
