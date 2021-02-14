@@ -6,6 +6,7 @@
 
 DogTypes::DogTypes() {
     countAndIndex = 0;
+    file.open(fileName, ios::in | ios::app);
 }
 
 void DogTypes::addABreed() {
@@ -17,10 +18,13 @@ void DogTypes::addABreed() {
     else {
         cin.ignore();
         cout << "What is the name of the new dog? ";
+        cin >> ws; // eat up any leading white spaces
         cin.getline(breeds[countAndIndex].name, STR_SIZE);
         cout << "What is the description of the new dog? ";
+        cin >> ws;
         cin.getline(breeds[countAndIndex].description, STR_SIZE);
         cout << "What is the classification of the new dog? ";
+        cin >> ws;
         cin.getline(breeds[countAndIndex].classification, STR_SIZE);
         cout << "What is the average weight in pounds (between 4 and 195)? ";
         cin >> breeds[countAndIndex].avgWeight;
@@ -42,6 +46,7 @@ void DogTypes::addABreed() {
         }
         cin.ignore();
         cout << "What is the origin of the new dog? ";
+        cin >> ws;
         cin.getline(breeds[countAndIndex].origin, STR_SIZE);
         cout << breeds[countAndIndex].name << " was successfully added to the database." << endl;
         countAndIndex++;
@@ -72,14 +77,13 @@ bool DogTypes::searchBreeds() {
 }
 
 int DogTypes::loadBreeds() {
-    ifstream inFile;
     cout << "Welcome to the dog breed information program. What is the name of the dog breed data file? ";
     cin.getline(fileName, STR_SIZE);
-    inFile.open(fileName);
-    while(!inFile.is_open()) {
+    file.open(fileName);
+    while(!file.is_open()) {
         cout << fileName << " was not found. Please try again or type 'quit' to exit the program. ";
         cin.getline(fileName, STR_SIZE);
-        inFile.open(fileName);
+        file.open(fileName);
         if(strcmp(fileName, "quit") == 0) {
             return 0;
         }
@@ -87,22 +91,22 @@ int DogTypes::loadBreeds() {
     // Read all of the data from the file.
     // Pug,Loveable lap dog,Toy Group,12.5,11.0,China
     // German Shepherd,shepherd dog,Working Group, ...
-    while(!inFile.eof()) {
-        inFile.getline(breeds[countAndIndex].name, STR_SIZE, ','); // name will get "Pug"
-        inFile.getline(breeds[countAndIndex].description, STR_SIZE, ',');
-        inFile.getline(breeds[countAndIndex].classification, STR_SIZE, ',');
-        inFile >> breeds[countAndIndex].avgWeight;
-        inFile.ignore(1); // remove the comma.
-        inFile >> breeds[countAndIndex].avgHeight;
-        inFile.ignore();
-        inFile.getline(breeds[countAndIndex].origin, STR_SIZE, '\n');
+    while(!file.eof()) {
+        file.getline(breeds[countAndIndex].name, STR_SIZE, ','); // name will get "Pug"
+        file.getline(breeds[countAndIndex].description, STR_SIZE, ',');
+        file.getline(breeds[countAndIndex].classification, STR_SIZE, ',');
+        file >> breeds[countAndIndex].avgWeight;
+        file.ignore(1); // remove the comma.
+        file >> breeds[countAndIndex].avgHeight;
+        file.ignore();
+        file.getline(breeds[countAndIndex].origin, STR_SIZE, '\n');
         countAndIndex++;
         if(countAndIndex >= ARR_SIZE) { // the array is full.
             break;
         }
-        inFile.peek(); // checking for the end of file marker.
+        file.peek(); // checking for the end of file marker.
     }
-    inFile.close();
+    file.close();
     return countAndIndex;
 }
 
@@ -122,13 +126,13 @@ void DogTypes::listBreeds() {
 }
 
 void DogTypes::writeBreeds() {
-    ofstream outFile;
     int i;
-    outFile.open("breeds.txt");
+    file.open(fileName);
+    file.clear();
     for(i = 0; i < countAndIndex; ++i) {
-        outFile << breeds[i].name << "," << breeds[i].description << "," << breeds[i].classification 
+        file << breeds[i].name << "," << breeds[i].description << "," << breeds[i].classification 
         << "," << fixed << setprecision(2) << breeds[i].avgWeight << "," << breeds[i].avgHeight << "," << breeds[i].origin << endl;
     }
-    outFile.close();
+    file.close();
 }
 

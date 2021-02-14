@@ -39,7 +39,7 @@ int main() {
         } while(choice != 'Q');
         if(choice == 'Q') {
             cout << "Terminating Program." << endl;
-            dogDatabase.writeBreeds();
+            dogDatabase.writeBreeds();           
         } 
     }
     else {

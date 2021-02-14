@@ -24,6 +24,7 @@ class DogTypes {
     dogBreed breeds[ARR_SIZE];
     int countAndIndex;
     char fileName[STR_SIZE];
+    fstream file;
 public:
     DogTypes();
     int loadBreeds();
