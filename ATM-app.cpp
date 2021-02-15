@@ -18,8 +18,8 @@ int main() {
 		showMenu();
 		cout << "Option:";
 		cin >> option;
-		//System('cls') clear screen for windows vs
-		cout << "\n\n\n\n\n";
+		//system('cls') clear screen for windows vs
+		system("clear");
 		switch(option) {
 			case 1: cout << "Balance is:" << balance << endl; break;
 			case 2: 
@@ -38,6 +38,6 @@ int main() {
 					cout << "Not enough money\n";
 				break;
 			default: cout << "Invalid option!\n";
-	}
+		}
 	} while (option != 4);
 }
